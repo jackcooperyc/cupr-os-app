@@ -1,0 +1,53 @@
+"use client";
+
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Settings as SettingsIcon, Building, ShieldCheck } from "lucide-react";
+
+export default function SettingsPage() {
+  return (
+    <div className="space-y-6 max-w-7xl mx-auto pb-10 flex flex-col h-[calc(100vh-6rem)]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 shrink-0">
+        <div>
+          <div className="flex items-center space-x-3 mb-1">
+             <h2 className="text-2xl font-bold tracking-tight text-cupros-text">Settings</h2>
+          </div>
+          <p className="text-cupros-text-muted text-sm mt-1">Organization, billing, and roles management.</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-8 flex-1 min-h-0">
+        <div className="w-full lg:w-48 shrink-0">
+           <nav className="flex flex-col space-y-1">
+              <a href="#" className="px-3 py-2 bg-cupros-surface-hover text-cupros-text rounded text-sm font-medium">Organization</a>
+              <a href="#" className="px-3 py-2 text-cupros-text-muted hover:text-cupros-text hover:bg-cupros-surface-hover rounded text-sm transition-colors">Billing</a>
+              <a href="#" className="px-3 py-2 text-cupros-text-muted hover:text-cupros-text hover:bg-cupros-surface-hover rounded text-sm transition-colors">Roles & Users</a>
+              <a href="#" className="px-3 py-2 text-cupros-text-muted hover:text-cupros-text hover:bg-cupros-surface-hover rounded text-sm transition-colors">Security</a>
+           </nav>
+        </div>
+
+        <div className="flex-1 min-h-0">
+           <Card>
+             <CardHeader className="border-b border-cupros-border">
+               <CardTitle className="text-base flex items-center"><Building className="w-4 h-4 mr-2" /> Organization Profile</CardTitle>
+             </CardHeader>
+             <CardContent className="pt-6 space-y-6">
+                <div>
+                   <label className="block text-sm font-medium text-cupros-text-muted mb-1">Organization Name</label>
+                   <input type="text" className="w-full max-w-md bg-cupros-bg border border-cupros-border rounded p-2 text-sm text-cupros-text focus:outline-none focus:border-cupros-teal-light" defaultValue="Green Coast Collectives" />
+                </div>
+                <div>
+                   <label className="block text-sm font-medium text-cupros-text-muted mb-1">Primary Domain</label>
+                   <input type="text" className="w-full max-w-md bg-cupros-bg border border-cupros-border rounded p-2 text-sm text-cupros-text focus:outline-none focus:border-cupros-teal-light" defaultValue="greencoast.com" disabled />
+                   <p className="text-xs text-cupros-text-muted mt-1">Contact support to change your primary domain.</p>
+                </div>
+                <div className="pt-4 border-t border-cupros-border">
+                   <button className="px-4 py-2 bg-cupros-teal-light text-white rounded text-sm font-medium hover:bg-cupros-teal transition-colors">Save Changes</button>
+                </div>
+             </CardContent>
+           </Card>
+        </div>
+      </div>
+    </div>
+  );
+}

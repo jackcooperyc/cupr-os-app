@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-cupros-bg: #09090b; /* Zinc 950 - deeper, less purple */
+  --color-cupros-surface: #121214; /* slightly elevated from bg */
+  --color-cupros-surface-hover: #18181b; /* Zinc 900 */
+  
+  --color-cupros-teal: #0f3d39; 
+  --color-cupros-teal-light: #14b8a6; /* Teal 500 */
+  --color-cupros-teal-bg: rgba(20, 184, 166, 0.1);
+  
+  --color-cupros-amber: #d97706; /* Amber 600 */
+  --color-cupros-amber-bg: rgba(217, 119, 6, 0.1);
+  --color-cupros-rose: #e11d48; /* Rose 600 */
+  --color-cupros-rose-bg: rgba(225, 29, 72, 0.1);
+  --color-cupros-green: #10b981; /* Emerald 500 */
+  --color-cupros-green-bg: rgba(16, 185, 129, 0.1);
+
+  --color-cupros-border: #27272a; /* Zinc 800 */
+  --color-cupros-border-subtle: #1f1f22; /* very faint border for cards */
+  
+  --color-cupros-text: #fafafa; /* Zinc 50 */
+  --color-cupros-text-muted: #a1a1aa; /* Zinc 400 */
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Typographic refinements */
+  --font-weight-black: 800;
+  --font-weight-extrabold: 700;
+  --font-weight-bold: 600;
+  --font-weight-semibold: 500;
+  --font-weight-medium: 400;
+  --font-weight-normal: 300;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cupros-bg);
+    color: var(--color-cupros-text);
+    font-family: var(--font-sans);
+    /* Slightly smaller base font size for a "dense app" feel */
+    font-size: 13px;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+}
+
+/* Scrollbar tweaks for enterprise feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cupros-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cupros-text-muted);
+}
+
+/* Utility to ensure numbers line up correctly in tables */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* App-level utility classes for consistent UI styling */
+@layer utilities {
+  .hero-button {
+    @apply px-3 py-1.5 bg-cupros-text text-cupros-bg text-[13px] font-medium rounded-md hover:bg-cupros-text/90 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.4)] active:scale-[0.98];
+  }
+  
+  .secondary-button {
+    @apply px-3 py-1.5 bg-cupros-surface border border-cupros-border text-[13px] font-medium rounded-md hover:bg-cupros-surface-hover text-cupros-text transition-all shadow-sm active:scale-[0.98];
+  }
+
+  .glass-header {
+    @apply bg-cupros-bg/80 backdrop-blur-md border-b border-cupros-border supports-[backdrop-filter]:bg-cupros-bg/60;
+  }
+}
