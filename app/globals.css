@@ -1,57 +1,154 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Map semantic tokens → Tailwind color utilities */
 @theme {
-  --color-cupros-bg: #09090b; /* Zinc 950 - deeper, less purple */
-  --color-cupros-surface: #121214; /* slightly elevated from bg */
-  --color-cupros-surface-hover: #18181b; /* Zinc 900 */
-  
-  --color-cupros-teal: #0f3d39; 
-  --color-cupros-teal-light: #14b8a6; /* Teal 500 */
-  --color-cupros-teal-bg: rgba(20, 184, 166, 0.1);
-  
-  --color-cupros-amber: #d97706; /* Amber 600 */
-  --color-cupros-amber-bg: rgba(217, 119, 6, 0.1);
-  --color-cupros-rose: #e11d48; /* Rose 600 */
-  --color-cupros-rose-bg: rgba(225, 29, 72, 0.1);
-  --color-cupros-green: #10b981; /* Emerald 500 */
-  --color-cupros-green-bg: rgba(16, 185, 129, 0.1);
+  --color-cupros-bg: var(--cupros-bg);
+  --color-cupros-surface: var(--cupros-surface);
+  --color-cupros-surface-hover: var(--cupros-surface-hover);
 
-  --color-cupros-border: #27272a; /* Zinc 800 */
-  --color-cupros-border-subtle: #1f1f22; /* very faint border for cards */
-  
-  --color-cupros-text: #fafafa; /* Zinc 50 */
-  --color-cupros-text-muted: #a1a1aa; /* Zinc 400 */
-  
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  --color-cupros-orange: var(--cupros-orange);
+  --color-cupros-orange-light: var(--cupros-orange-light);
+  --color-cupros-orange-bg: var(--cupros-orange-bg);
 
-  /* Typographic refinements */
-  --font-weight-black: 800;
-  --font-weight-extrabold: 700;
-  --font-weight-bold: 600;
-  --font-weight-semibold: 500;
-  --font-weight-medium: 400;
-  --font-weight-normal: 300;
+  --color-cupros-teal: var(--cupros-teal);
+  --color-cupros-teal-light: var(--cupros-teal-light);
+  --color-cupros-teal-bg: var(--cupros-teal-bg);
+
+  --color-cupros-amber: var(--cupros-amber);
+  --color-cupros-amber-bg: var(--cupros-amber-bg);
+  --color-cupros-rose: var(--cupros-rose);
+  --color-cupros-rose-bg: var(--cupros-rose-bg);
+  --color-cupros-green: var(--cupros-green);
+  --color-cupros-green-bg: var(--cupros-green-bg);
+
+  --color-cupros-border: var(--cupros-border);
+  --color-cupros-border-subtle: var(--cupros-border-subtle);
+
+  --color-cupros-text: var(--cupros-text);
+  --color-cupros-text-muted: var(--cupros-text-muted);
+  --color-cupros-text-accent: var(--cupros-text-accent);
+
+  --color-cupros-shell-header: var(--cupros-shell-header);
+  --color-cupros-shell-sidebar: var(--cupros-shell-sidebar);
+
+  --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Dark theme (default) — pitch deck zinc + orange/teal */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --cupros-bg: #0f0f11;
+  --cupros-surface: #18181b;
+  --cupros-surface-hover: #27272a;
+
+  --cupros-orange: #f97316;
+  --cupros-orange-light: #fb923c;
+  --cupros-orange-bg: rgba(249, 115, 22, 0.12);
+
+  --cupros-teal: #0f766e;
+  --cupros-teal-light: #14b8a6;
+  --cupros-teal-bg: rgba(20, 184, 166, 0.12);
+
+  --cupros-amber: #f97316;
+  --cupros-amber-bg: rgba(249, 115, 22, 0.1);
+  --cupros-rose: #e11d48;
+  --cupros-rose-bg: rgba(225, 29, 72, 0.12);
+  --cupros-green: #10b981;
+  --cupros-green-bg: rgba(16, 185, 129, 0.12);
+
+  --cupros-border: #27272a;
+  --cupros-border-subtle: #1f1f22;
+
+  --cupros-text: #fafafa;
+  --cupros-text-muted: #a1a1aa;
+  --cupros-text-accent: #14b8a6;
+
+  --cupros-shell-header: rgba(15, 15, 17, 0.88);
+  --cupros-shell-sidebar: rgba(24, 24, 27, 0.92);
+  --cupros-body-gradient: radial-gradient(
+    ellipse 100% 60% at 50% -10%,
+    rgba(249, 115, 22, 0.08) 0%,
+    rgba(20, 184, 166, 0.06) 40%,
+    transparent 70%
+  );
+
+  --cupros-chart-teal: #14b8a6;
+  --cupros-chart-muted: rgba(244, 244, 245, 0.15);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --cupros-bg: #f4f4f5;
+  --cupros-surface: #ffffff;
+  --cupros-surface-hover: #e4e4e7;
+
+  --cupros-orange: #ea580c;
+  --cupros-orange-light: #c2410c;
+  --cupros-orange-bg: rgba(234, 88, 12, 0.1);
+
+  --cupros-teal: #0d9488;
+  --cupros-teal-light: #0f766e;
+  --cupros-teal-bg: rgba(13, 148, 136, 0.1);
+
+  --cupros-amber: #ea580c;
+  --cupros-amber-bg: rgba(234, 88, 12, 0.08);
+  --cupros-rose: #be123c;
+  --cupros-rose-bg: rgba(190, 18, 60, 0.08);
+  --cupros-green: #059669;
+  --cupros-green-bg: rgba(5, 150, 105, 0.1);
+
+  --cupros-border: #d4d4d8;
+  --cupros-border-subtle: #e4e4e7;
+
+  --cupros-text: #18181b;
+  --cupros-text-muted: #52525b;
+  --cupros-text-accent: #0f766e;
+
+  --cupros-shell-header: rgba(244, 244, 245, 0.92);
+  --cupros-shell-sidebar: rgba(255, 255, 255, 0.96);
+  --cupros-body-gradient: radial-gradient(
+    ellipse 100% 60% at 50% -10%,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(20, 184, 166, 0.08) 45%,
+    transparent 70%
+  );
+
+  --cupros-chart-teal: #0d9488;
+  --cupros-chart-muted: rgba(24, 24, 27, 0.08);
 }
 
 @layer base {
   body {
-    background-color: var(--color-cupros-bg);
-    color: var(--color-cupros-text);
+    background-color: var(--cupros-bg);
+    background-image: var(--cupros-body-gradient);
+    color: var(--cupros-text);
     font-family: var(--font-sans);
-    /* Slightly smaller base font size for a "dense app" feel */
     font-size: 13px;
     letter-spacing: -0.01em;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
     letter-spacing: -0.02em;
-    font-weight: 500;
+    font-weight: 400;
   }
 }
 
-/* Scrollbar tweaks for enterprise feel */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -62,30 +159,52 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-cupros-border);
+  background: var(--cupros-border);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-cupros-text-muted);
+  background: var(--cupros-text-muted);
 }
 
-/* Utility to ensure numbers line up correctly in tables */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* App-level utility classes for consistent UI styling */
 @layer utilities {
   .hero-button {
-    @apply px-3 py-1.5 bg-cupros-text text-cupros-bg text-[13px] font-medium rounded-md hover:bg-cupros-text/90 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.4)] active:scale-[0.98];
+    @apply px-3 py-1.5 text-[13px] font-medium rounded-md transition-all active:scale-[0.98];
+    background: linear-gradient(135deg, var(--cupros-orange) 0%, var(--cupros-teal-light) 100%);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }
-  
+
+  .hero-button:hover {
+    filter: brightness(1.06);
+  }
+
   .secondary-button {
     @apply px-3 py-1.5 bg-cupros-surface border border-cupros-border text-[13px] font-medium rounded-md hover:bg-cupros-surface-hover text-cupros-text transition-all shadow-sm active:scale-[0.98];
   }
 
   .glass-header {
-    @apply bg-cupros-bg/80 backdrop-blur-md border-b border-cupros-border supports-[backdrop-filter]:bg-cupros-bg/60;
+    @apply backdrop-blur-md border-b border-cupros-border;
+    background: var(--cupros-shell-header);
+  }
+
+  .gradient-text-cupros {
+    background: linear-gradient(135deg, var(--cupros-orange) 0%, var(--cupros-teal-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

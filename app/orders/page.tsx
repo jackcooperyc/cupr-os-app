@@ -1,58 +1,82 @@
 "use client";
 
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from "react";
 import { Badge } from "@/components/ui/badge";
+import { PageHeader } from "@/components/shared/PageHeader";
+import { TablePageSkeleton } from "@/components/shared/Skeleton";
+import { EmptyState } from "@/components/shared/EmptyState";
+import { useCuprosMock } from "@/hooks/useCuprosMock";
+import type { OrdersPayload, Order, OrderStatusType } from "@/lib/mockApi";
 import { 
   Search, 
   Filter, 
   Download, 
-  ChevronDown, 
   MoreHorizontal, 
   Store, 
   ShoppingBag, 
-  Globe, 
-  Clock, 
   Clock3, 
   CheckCircle2, 
   AlertOctagon,
-  ArrowUpDown
+  ArrowUpDown,
+  ShoppingCart
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 export default function OrdersPage() {
+  const { data, loading, error } = useCuprosMock<OrdersPayload>("orders");
+
+  if (loading) {
+    return <TablePageSkeleton />;
+  }
+
+  if (error || !data) {
+    return (
+      <div className="max-w-7xl mx-auto pb-10 mt-6">
+        <EmptyState
+          icon={ShoppingCart}
+          title="Orders unavailable"
+          description={error ?? "Could not load orders data."}
+          action={
+            <button type="button" className="secondary-button" onClick={() => window.location.reload()}>
+              Retry
+            </button>
+          }
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-10 flex flex-col h-[calc(100vh-52px)]">
-      
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 shrink-0 mt-6">
-        <div>
-          <div className="flex items-center space-x-3 mb-1">
-            <h2 className="text-xl font-semibold tracking-tight text-cupros-text">Orders Hub</h2>
-            <div className="flex space-x-2">
-              <Badge variant="outline" className="text-[10px] bg-cupros-surface border-cupros-border text-cupros-text-muted tracking-wide flex items-center">
-                 <div className="w-1.5 h-1.5 rounded-full bg-cupros-teal-light mr-1.5 animate-pulse" />
-                 Meadow sync: Live
+      <PageHeader
+        className="mt-6"
+        title={data.header.title}
+        description={data.header.description}
+        badges={
+          <div className="flex space-x-2">
+            {data.syncBadges.map((badge) => (
+              <Badge
+                key={badge.label}
+                variant="outline"
+                className="text-[10px] bg-cupros-surface border-cupros-border text-cupros-text-muted tracking-wide flex items-center"
+              >
+                {badge.variant === 'live' ? (
+                  <div className="w-1.5 h-1.5 rounded-full bg-cupros-teal-light mr-1.5 animate-pulse" />
+                ) : (
+                  <CheckCircle2 className="w-3 h-3 text-cupros-teal-light mr-1" />
+                )}
+                {badge.label}
               </Badge>
-              <Badge variant="outline" className="text-[10px] bg-cupros-surface border-cupros-border text-cupros-text-muted tracking-wide flex items-center">
-                 <CheckCircle2 className="w-3 h-3 text-cupros-teal-light mr-1" />
-                 Flower Co.: Connected
-              </Badge>
-            </div>
+            ))}
           </div>
-          <p className="text-cupros-text-muted text-[13px] mt-1">Manage pickup, delivery, and shipped orders across all channels.</p>
-        </div>
-        <div className="flex space-x-2">
-          <button className="secondary-button flex items-center">
-             <Download className="w-3.5 h-3.5 mr-1.5" /> Export CSV
+        }
+        actions={
+          <button type="button" className="secondary-button flex items-center">
+            <Download className="w-3.5 h-3.5 mr-1.5" /> Export CSV
           </button>
-        </div>
-      </div>
+        }
+      />
 
-      {/* Main Content Area */}
       <div className="flex flex-col flex-1 min-h-0 bg-cupros-surface border border-cupros-border-subtle rounded-lg overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.5),_0_1px_2px_rgba(0,0,0,0.3)]">
-        
-        {/* Sticky Filters Toolbar */}
         <div className="p-3 border-b border-cupros-border/50 bg-cupros-surface/50 sticky top-0 z-20 flex flex-wrap gap-3 items-center justify-between">
            <div className="flex items-center space-x-3 flex-1 min-w-[300px]">
               <div className="relative w-full max-w-sm">
@@ -65,30 +89,29 @@ export default function OrdersPage() {
                   placeholder="Order ID, customer, or phone..."
                 />
               </div>
-              <button className="secondary-button !px-2 flex items-center justify-center shrink-0">
+              <button type="button" className="secondary-button !px-2 flex items-center justify-center shrink-0">
                  <Filter className="w-3.5 h-3.5" />
               </button>
            </div>
            
            <div className="flex items-center space-x-3 text-[13px]">
               <div className="flex border border-cupros-border rounded overflow-hidden shadow-sm">
-                <button className="px-3 py-1.5 bg-cupros-surface-hover font-medium border-r border-cupros-border">All Status</button>
-                <button className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">Pending <Badge variant="destructive" className="ml-1 px-1 bg-rose-500 text-white font-bold tracking-tight text-[10px] uppercase">4</Badge></button>
-                <button className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">Completed</button>
-                <button className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">Exceptions</button>
+                <button type="button" className="px-3 py-1.5 bg-cupros-surface-hover font-medium border-r border-cupros-border">All Status</button>
+                <button type="button" className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">
+                  Pending <Badge variant="destructive" className="ml-1 px-1 bg-rose-500 text-white font-bold tracking-tight text-[10px] uppercase">{data.filterCounts.pending}</Badge>
+                </button>
+                <button type="button" className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">Completed</button>
+                <button type="button" className="px-3 py-1.5 bg-cupros-surface hover:bg-cupros-surface-hover text-cupros-text-muted transition-colors">Exceptions</button>
               </div>
            </div>
         </div>
 
-        {/* Action Bar (shows when rows selected) - hidden in this static view */}
-        
-        {/* Table Area */}
         <div className="overflow-auto flex-1 bg-cupros-bg/50">
           <table className="w-full text-left border-collapse">
             <thead className="bg-cupros-surface/80 text-cupros-text-muted uppercase text-[10px] tracking-wider font-semibold sticky top-0 z-10 backdrop-blur-sm border-b border-cupros-border/50">
               <tr>
                 <th className="px-5 py-2.5 w-12">
-                   <input type="checkbox" className="rounded border-cupros-border bg-cupros-bg accent-cupros-teal-light" />
+                   <input type="checkbox" className="rounded border-cupros-border bg-cupros-bg accent-cupros-teal-light" aria-label="Select all orders" />
                 </th>
                 <th className="px-5 py-2.5 whitespace-nowrap cursor-pointer hover:text-cupros-text transition-colors">
                   <div className="flex items-center">Order ID <ArrowUpDown className="w-3 h-3 ml-1" /></div>
@@ -105,36 +128,22 @@ export default function OrdersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-cupros-border/50 text-[13px]">
-               <OrderRow 
-                 id="ORD-0091" time="2m ago" customer="Sarah Jenkins" email="sarah.j@email.com" 
-                 type="Pickup" source="Meadow POS" store="Hollywood" total="$145.00" 
-                 status="Pending" statusType="warning" 
-               />
-               <OrderRow 
-                 id="ORD-0090" time="15m ago" customer="Marcus Cole" email="mcole42@email.com" 
-                 type="Delivery" source="Flower Co. Partner" deliveryPartner="Flower Co. — Channel Partner" store="Downtown" total="$89.50" 
-                 status="In Transit" statusType="default" 
-               />
-               <OrderRow 
-                 id="ORD-0089" time="1h ago" customer="Elena Rodriguez" email="elena.r@email.com" 
-                 type="Pickup" source="Meadow POS" store="Venice" total="$210.00" 
-                 status="Completed" statusType="success" 
-               />
-               <OrderRow 
-                 id="ORD-0088" time="1h 12m ago" customer="David Kim" email="dkim99@email.com" 
-                 type="Delivery" source="CŪPR Direct" store="Hollywood" total="$315.00" 
-                 status="Failed: ID Verification" statusType="destructive" 
-               />
-               <OrderRow 
-                 id="ORD-0087" time="2h ago" customer="Guest User" email="--" 
-                 type="Pickup" source="Google Business" store="Santa Monica" total="$65.00" 
-                 status="Completed" statusType="success" 
-               />
-               <OrderRow 
-                 id="ORD-0086" time="2h 30m ago" customer="Jordan Lee" email="jordanlee12@email.com" 
-                 type="Pickup" source="CŪPR Direct" store="Hollywood" total="$180.00" 
-                 status="Pending" statusType="warning" 
-               />
+               {data.orders.length === 0 ? (
+                 <tr>
+                   <td colSpan={9}>
+                     <EmptyState
+                       icon={ShoppingCart}
+                       title="No orders yet"
+                       description="Orders from all channels will appear here once they sync."
+                       compact
+                     />
+                   </td>
+                 </tr>
+               ) : (
+                 data.orders.map((order) => (
+                   <OrderRow key={order.id} {...order} />
+                 ))
+               )}
             </tbody>
           </table>
         </div>
@@ -143,11 +152,11 @@ export default function OrdersPage() {
   );
 }
 
-function OrderRow({ id, time, customer, email, type, source, deliveryPartner, store, total, status, statusType }: any) {
+function OrderRow({ id, time, customer, email, type, source, deliveryPartner, store, total, status, statusType }: Order) {
   return (
     <tr className="hover:bg-cupros-surface-hover/50 transition-colors group cursor-pointer text-[13px]">
       <td className="px-5 py-3 w-12">
-        <input type="checkbox" className="rounded border-cupros-border bg-cupros-bg accent-cupros-teal-light opacity-0 group-hover:opacity-100 transition-opacity" />
+        <input type="checkbox" className="rounded border-cupros-border bg-cupros-bg accent-cupros-teal-light opacity-0 group-hover:opacity-100 transition-opacity" aria-label={`Select order ${id}`} />
       </td>
       <td className="px-5 py-3">
         <div className="font-mono text-[12px] font-medium text-cupros-text group-hover:text-cupros-teal-light transition-colors tracking-tight">{id}</div>
@@ -182,14 +191,14 @@ function OrderRow({ id, time, customer, email, type, source, deliveryPartner, st
         {total}
       </td>
       <td className="px-5 py-3">
-         <Badge variant={statusType as any} className="whitespace-nowrap uppercase tracking-wider text-[9px] px-1.5 hover:bg-cupros-surface">
+         <Badge variant={statusType} className="whitespace-nowrap uppercase tracking-wider text-[9px] px-1.5 hover:bg-cupros-surface">
             {statusType === 'success' && <CheckCircle2 className="w-3 h-3 mr-1" />}
             {statusType === 'destructive' && <AlertOctagon className="w-3 h-3 mr-1" />}
             {status}
          </Badge>
       </td>
       <td className="px-5 py-3 text-right">
-        <button className="p-1.5 rounded hover:bg-cupros-border text-cupros-text-muted hover:text-cupros-text opacity-0 group-hover:opacity-100 transition-all">
+        <button type="button" className="p-1.5 rounded hover:bg-cupros-border text-cupros-text-muted hover:text-cupros-text opacity-0 group-hover:opacity-100 transition-all">
           <MoreHorizontal className="w-4 h-4" />
         </button>
       </td>

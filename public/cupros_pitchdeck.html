@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="slides-format" content="viewport">
+  <title>CŪPR.OS Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-bg: #18181B;
+      --color-bg-deep: #0F0F11;
+      --color-surface: #27272A;
+      --color-text: #FAFAFA;
+      --color-text-secondary: #D4D4D8;
+      --color-text-muted: #A1A1AA;
+      --color-accent-1: #F97316;
+      --color-accent-2: #14B8A6;
+      --color-accent-3: #FEF3C7;
+      --color-glass-bg: rgba(255,255,255,0.05);
+      --color-glass-border: rgba(255,255,255,0.08);
+      --color-vignette: rgba(0,0,0,0.45);
+      --font-display: 'Archivo Black', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+  </style>
+  <style>
+    :root { --color-bg:#18181B; --color-text:#FAFAFA; --glow-color-rgb:249,115,22; --color-glass-bg:rgba(255,255,255,0.05); --color-glass-border:rgba(255,255,255,0.08); }
+    *,*::before,*::after{box-sizing:border-box} html,body{background:var(--color-bg);margin:0}
+    body{font-family:var(--font-body);color:var(--color-text);overflow:hidden;height:100vh;width:100vw}
+    .deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.95);transition:opacity .7s ease, transform .7s ease;pointer-events:none;overflow:hidden}.slide.active{opacity:1;transform:scale(1);pointer-events:all}.slide>.content{position:relative;z-index:2;width:100%;max-width:1180px;padding:clamp(1.5rem,4vw,4rem)}
+    .nav-controls{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;background:var(--color-glass-bg);backdrop-filter:blur(10px);padding:10px 24px;border-radius:40px;border:1px solid var(--color-glass-border)}
+    .nav-btn{width:40px;height:40px;border:none;background:var(--color-glass-bg);color:#F97316;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}.slide-dots{display:flex;gap:8px}.slide-dots .dot{width:10px;height:10px;border-radius:50%;background:var(--color-glass-border);cursor:pointer}.slide-dots .dot.active{background:#F97316;transform:scale(1.25)}.slide-counter{font-size:.8rem;color:#A1A1AA;min-width:48px;text-align:center}
+    .reveal{opacity:0;transform:translateY(20px)} .gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}.blob{position:absolute;border-radius:50%;filter:blur(80px);animation:float-slow 12s ease-in-out infinite}.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite}.blob:nth-child(3){animation:float-slow 18s ease-in-out infinite reverse}.blob:nth-child(4){animation:float-drift 20s ease-in-out infinite reverse}
+    @keyframes float-slow{0%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-45px) scale(1.1)}50%{transform:translate(-35px,35px) scale(.92)}75%{transform:translate(45px,18px) scale(1.05)}100%{transform:translate(0,0) scale(1)}}
+    @keyframes float-drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-50px,-60px) scale(1.12)}66%{transform:translate(40px,30px) scale(.88)}100%{transform:translate(0,0) scale(1)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}} @keyframes glow-pulse{0%,100%{text-shadow:0 0 18px rgba(249,115,22,.5),0 0 42px rgba(249,115,22,.15)}50%{text-shadow:0 0 28px rgba(249,115,22,.78),0 0 58px rgba(20,184,166,.22)}}
+    .slide::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px;opacity:.03;mix-blend-mode:overlay}
+    .slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.45) 100%)}
+    .particle-canvas,.particle-canvas-ambient{position:absolute;inset:0;z-index:1}.mouse-spotlight{position:fixed;inset:0;z-index:99;pointer-events:none}.deco-shape{position:absolute;border-radius:9999px;opacity:.13;filter:blur(2px);z-index:1;pointer-events:none}
+    .text-glow{text-shadow:0 0 20px rgba(249,115,22,.5),0 0 40px rgba(249,115,22,.18)}.stat-glow{animation:glow-pulse 3s ease-in-out infinite}
+    .pill{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .9rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#D4D4D8}
+    .bar-track{width:100%;height:22px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid rgba(255,255,255,.07)}.bar-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#F97316,#14B8A6)}
+  </style>
+</head>
+<body>
+<div class="mouse-spotlight"></div>
+<div class="deck">
+
+<div class="slide slide-1 active" data-slide="1">
+  <div class="gradient-mesh">
+    <div class="blob" style="width:520px;height:520px;top:-120px;right:-120px;background:#F97316;opacity:.16"></div>
+    <div class="blob" style="width:320px;height:320px;bottom:-70px;left:-80px;background:#14B8A6;opacity:.14"></div>
+    <div class="blob" style="width:220px;height:220px;top:40%;left:15%;background:#FEF3C7;opacity:.11"></div>
+    <div class="blob" style="width:180px;height:180px;top:8%;left:44%;background:#F97316;opacity:.08"></div>
+  </div>
+  <canvas class="particle-canvas"></canvas>
+  <div class="content text-center">
+    <div class="text-[112px] mb-4 animate-[float_3s_ease-in-out_infinite]">🧠</div>
+    <h1 class="font-display text-[clamp(2.8rem,6.4vw,5.6rem)] tracking-tight mb-4 bg-linear-to-br from-accent-1 via-accent-2 to-accent-3 bg-clip-text text-transparent reveal">CŪPR.OS</h1>
+    <p class="text-[clamp(1rem,1.7vw,1.4rem)] text-text-secondary max-w-[980px] mx-auto reveal">The compliance-native growth OS for dispensaries and smoke shops, now framed around a Unified Inventory Network that turns fragmented retail, wholesale, and channel data into one operating layer</p>
+    <p class="mt-5 text-[0.85rem] tracking-[0.35em] uppercase text-text-muted reveal">Websites • Ecommerce • Listings • Marketing • Compliance</p>
+  </div>
+</div>
+
+<div class="slide slide-2" data-slide="2">
+  <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;top:-70px;right:-70px;background:#F97316;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#14B8A6;opacity:.07"></div></div>
+  <div class="deco-shape" data-speed="0.03" style="width:170px;height:170px;top:15%;right:13%;background:rgba(249,115,22,.12)"></div>
+  <div class="content">
+    <div class="pill reveal">01 • Problem</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">Cannabis retail growth is broken by fragmentation</h2>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">🧩</div><h3 class="font-bold text-xl mb-3">Too many disconnected tools</h3><p class="text-text-secondary">Operators split websites, menus, ecommerce, listings, promotions, analytics, and team workflows across separate vendors.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">⚠️</div><h3 class="font-bold text-xl mb-3">Regulation kills speed</h3><p class="text-text-secondary">Content, claims, and promotions require constant compliance awareness that generic CMS and marketing stacks do not solve well.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">📉</div><h3 class="font-bold text-xl mb-3">Data never compounds</h3><p class="text-text-secondary">Retailers rarely unify POS, inventory, menus, listings, and fulfillment signals into one network, so discoverability, conversion, and retention stay weak.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-3" data-slide="3">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-80px;left:-60px;background:#14B8A6;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;right:-50px;background:#F97316;opacity:.07"></div></div>
+  <div class="content">
+    <div class="pill reveal">02 • Product</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">One system to run digital retail operations</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-1 text-2xl font-bold mb-4">What it does</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Manage websites, ecommerce, menus, listings, and Unified Inventory Network workflows from one interface.</li>
+          <li>Keep hours, inventory-linked content, and digital profiles accurate across channels through synced source-of-truth inventory data.</li>
+          <li>Generate and update pages, campaigns, and operational content with AI-assisted workflows.</li>
+          <li>Support single-store, multi-location, and role-based team operations.</li>
+        </ul>
+      </div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-2 text-2xl font-bold mb-4">Why it wins</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Built for cannabis and smoke-shop retail instead of generic SMB websites.</li>
+          <li>Compliance-native from the start rather than bolted on later.</li>
+          <li>Turns live business data into marketing, discoverability, and measurable growth.</li>
+          <li>Sits above the existing stack instead of requiring total system replacement.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-4" data-slide="4">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-70px;right:-70px;background:#F97316;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;left:-40px;background:#FEF3C7;opacity:.07"></div></div>
+  <canvas class="particle-canvas-ambient"></canvas>
+  <div class="content">
+    <div class="pill reveal">03 • UIN</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">Unified Inventory Network operations</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-1 text-2xl font-bold mb-4">What UIN does</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Connects internal POS and inventory systems into one synchronized retail data layer.</li>
+          <li>Moves first-party retail items from backend systems into customer-facing menus and websites.</li>
+          <li>Standardizes source-of-truth product, availability, and merchandising signals across digital channels.</li>
+          <li>Creates the operating base for future wholesale accessories and branded commerce expansion.</li>
+        </ul>
+      </div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-2 text-2xl font-bold mb-4">Why UIN matters</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Turns the website from a brochure into a live revenue terminal.</li>
+          <li>Reduces manual data duplication across ecommerce, listings, and campaigns.</li>
+          <li>Improves attribution because inventory, traffic, and conversion events share one graph.</li>
+          <li>Becomes a defensible network layer as more operator systems and channels connect.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-5" data-slide="5">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-80px;left:-60px;background:#14B8A6;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;right:-50px;background:#F97316;opacity:.07"></div></div>
+  <div class="deco-shape" data-speed="0.04" style="width:150px;height:150px;top:13%;right:10%;background:rgba(20,184,166,.13)"></div>
+  <div class="content">
+    <div class="pill reveal">04 • Customers</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">Built for operators with real compliance pain</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-3 text-xl font-bold mb-4">Target segments</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Single-location dispensaries needing a unified digital stack.</li>
+          <li>Multi-location operators managing brand consistency across stores.</li>
+          <li>Smoke shops and head shops with similar local commerce and compliance-adjacent needs.</li>
+          <li>Ecosystem partners that plug into the same retail data layer.</li>
+        </ul>
+      </div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal">
+        <h3 class="text-accent-1 text-xl font-bold mb-4">Primary buyer value</h3>
+        <ul class="space-y-3 text-lg text-text-secondary">
+          <li>Replace patchwork vendors with a single operating layer.</li>
+          <li>Reduce compliance risk in marketing and content workflows.</li>
+          <li>Improve discoverability, conversion, and repeatable execution.</li>
+          <li>Centralize operational data that can later power deeper ecosystem products.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-6" data-slide="6">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-70px;right:-70px;background:#F97316;opacity:.08"></div><div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#14B8A6;opacity:.07"></div></div>
+  <div class="content">
+    <div class="pill reveal">05 • Architecture</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">UIN is the orchestration layer above the cannabis stack</h2>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">🏬</div><h3 class="font-bold text-xl mb-2">Operator systems</h3><p class="text-text-secondary">Retail sites, menus, team workflows, and campaigns are coordinated through a shared inventory-aware interface.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">🔌</div><h3 class="font-bold text-xl mb-2">Integration layer</h3><p class="text-text-secondary">Planned connections with systems like Meadow, Nabis, and Canix allow POS, wholesale, ERP, and compliance data to flow into the Unified Inventory Network.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">📈</div><h3 class="font-bold text-xl mb-2">Growth outputs</h3><p class="text-text-secondary">Cleaner attribution, smarter automation, stronger discoverability, and better merchant performance become possible once inventory becomes a shared operational graph.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-7" data-slide="7">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-70px;left:-60px;background:#FEF3C7;opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-60px;right:-40px;background:#F97316;opacity:.07"></div></div>
+  <canvas class="particle-canvas"></canvas>
+  <div class="content">
+    <div class="pill reveal">06 • Revenue</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">Recurring SaaS first, expansion second</h2>
+    <div class="grid grid-cols-4 gap-5">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-6 reveal"><div class="text-3xl mb-3">MRR</div><h3 class="font-bold mb-2">Subscriptions</h3><p class="text-text-secondary text-sm leading-relaxed">Core platform plans for different store sizes and operational complexity.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-6 reveal"><div class="text-3xl mb-3">Setup</div><h3 class="font-bold mb-2">Onboarding fees</h3><p class="text-text-secondary text-sm leading-relaxed">Implementation, migration, and account setup create near-term services revenue.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-6 reveal"><div class="text-3xl mb-3">Add-ons</div><h3 class="font-bold mb-2">Managed growth</h3><p class="text-text-secondary text-sm leading-relaxed">Premium campaigns, analytics, and operator services deepen ARPU per client.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-6 reveal"><div class="text-3xl mb-3">Expand</div><h3 class="font-bold mb-2">Ecosystem lift</h3><p class="text-text-secondary text-sm leading-relaxed">Future audience, commerce, and ecosystem monetization compounds once operator base exists.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-8" data-slide="8">
+  <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;top:-70px;right:-70px;background:#14B8A6;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;left:-40px;background:#F97316;opacity:.07"></div></div>
+  <div class="content">
+    <div class="pill reveal">07 • Go-to-market</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-7 reveal">Land with high-friction operators, then expand</h2>
+    <div class="bg-glass-bg border border-glass-border rounded-2xl p-7 reveal">
+      <div class="space-y-5">
+        <div class="grid grid-cols-[220px_1fr_80px] gap-4 items-center"><div class="text-text-secondary text-lg">Dispensary wedge</div><div class="bar-track"><div class="bar-fill" data-width="86"></div></div><div class="text-right text-accent-3">86%</div></div>
+        <div class="grid grid-cols-[220px_1fr_80px] gap-4 items-center"><div class="text-text-secondary text-lg">Smoke-shop expansion</div><div class="bar-track"><div class="bar-fill" data-width="69"></div></div><div class="text-right text-accent-3">69%</div></div>
+        <div class="grid grid-cols-[220px_1fr_80px] gap-4 items-center"><div class="text-text-secondary text-lg">Multi-location upsell</div><div class="bar-track"><div class="bar-fill" data-width="78"></div></div><div class="text-right text-accent-3">78%</div></div>
+        <div class="grid grid-cols-[220px_1fr_80px] gap-4 items-center"><div class="text-text-secondary text-lg">Ecosystem cross-sell</div><div class="bar-track"><div class="bar-fill" data-width="74"></div></div><div class="text-right text-accent-3">74%</div></div>
+      </div>
+    </div>
+    <div class="mt-7 bg-glass-bg border border-glass-border rounded-2xl p-6 reveal"><p class="text-xl text-text-secondary">The core motion is simple: solve immediate operator pain first, then grow account value through deeper operational and ecosystem adoption.</p></div>
+  </div>
+</div>
+
+<div class="slide slide-9" data-slide="9">
+  <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;top:-80px;left:-60px;background:#F97316;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;right:-40px;background:#14B8A6;opacity:.07"></div></div>
+  <div class="deco-shape" data-speed="0.03" style="width:150px;height:150px;bottom:14%;left:10%;background:rgba(249,115,22,.13)"></div>
+  <div class="content">
+    <div class="pill reveal">08 • Moat</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">Why generic tools and agencies lose here</h2>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal"><div class="text-5xl stat-glow font-display mb-3">Vertical</div><p class="text-text-secondary text-lg">CŪPR.OS is designed for cannabis and smoke-shop operations instead of broad SMB templates.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal"><div class="text-5xl stat-glow font-display mb-3">Native</div><p class="text-text-secondary text-lg">Compliance, workflows, and content logic are built into the product rather than outsourced to human process.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-8 reveal"><div class="text-5xl stat-glow font-display mb-3">Compounding</div><p class="text-text-secondary text-lg">Every client account adds operational data that improves product intelligence and future expansion surfaces.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-10" data-slide="10">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-70px;right:-70px;background:#F97316;opacity:.09"></div><div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#FEF3C7;opacity:.07"></div></div>
+  <div class="content">
+    <div class="pill reveal">09 • Ecosystem</div>
+    <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.2rem)] mt-4 mb-8 reveal">CŪPR.OS is the wedge into the larger JCS platform</h2>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">🏗️</div><h3 class="font-bold text-xl mb-2">Infrastructure first</h3><p class="text-text-secondary">CŪPR.OS is the first layer because retailers pay first and create the initial data exhaust.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">📓</div><h3 class="font-bold text-xl mb-2">Consumer extension</h3><p class="text-text-secondary">BudBook can later capture customer identity and preference history flowing from operator relationships.</p></div>
+      <div class="bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl p-7 reveal"><div class="text-4xl mb-4">🎤</div><h3 class="font-bold text-xl mb-2">Attention layer</h3><p class="text-text-secondary">BudBeat adds culture, creators, and live engagement once the operator and audience foundation exists.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-11" data-slide="11">
+  <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;top:-70px;left:-60px;background:#14B8A6;opacity:.08"></div><div class="blob" style="width:250px;height:250px;bottom:-60px;right:-40px;background:#F97316;opacity:.07"></div></div>
+  <canvas class="particle-canvas"></canvas>
+  <div class="content text-center">
+    <div class="pill reveal">10 • Thesis</div>
+    <h2 class="font-display text-[clamp(2.4rem,5vw,4.1rem)] mt-4 mb-5 bg-linear-to-br from-accent-1 via-accent-2 to-accent-3 bg-clip-text text-transparent reveal">Own the operating system</h2>
+    <p class="text-[clamp(1rem,1.6vw,1.25rem)] text-text-secondary max-w-[860px] mx-auto reveal">CŪPR.OS is positioned to become the system of record and execution for regulated retail growth in cannabis and smoke-shop commerce.</p>
+    <p class="mt-5 text-[0.85rem] tracking-[0.35em] uppercase text-text-muted reveal">Compliance-native • multi-tenant • AI-assisted • ecosystem-ready</p>
+  </div>
+</div>
+
+</div>
+<div class="nav-controls">
+  <button class="nav-btn" aria-label="Previous slide" onclick="changeSlide(-1)">&#8249;</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" aria-label="Next slide" onclick="changeSlide(1)">&#8250;</button>
+  <span class="slide-counter" id="counter">1 / 11</span>
+</div>
+<script>
+let current=1; const total=document.querySelectorAll('.slide').length; const dotsContainer=document.getElementById('dots'); const counter=document.getElementById('counter');
+for(let i=1;i<=total;i++){const dot=document.createElement('div'); dot.className='dot'+(i===1?' active':''); dot.onclick=()=>goToSlide(i); dotsContainer.appendChild(dot)}
+function goToSlide(n){const prev=document.querySelector('.slide.active'); const next=document.querySelector(`.slide[data-slide="${n}"]`); if(prev) prev.classList.remove('active'); if(next){next.classList.add('active'); animateSlide(next)} current=n; updateNav()}
+function changeSlide(dir){let next=current+dir; if(next<1) next=total; if(next>total) next=1; goToSlide(next)}
+function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current)); counter.textContent=current+' / '+total}
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault(); changeSlide(1)} if(e.key==='ArrowLeft'){e.preventDefault(); changeSlide(-1)}})
+let touchStartX=0; document.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX}); document.addEventListener('touchend',(e)=>{const diff=touchStartX-e.changedTouches[0].clientX; if(Math.abs(diff)>50) changeSlide(diff>0?1:-1)})
+function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none'; el.style.opacity='0'; el.style.transform='translateY(20px)'; el.offsetHeight; const delay=i*.08; el.style.transition=`opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`; el.style.opacity='1'; el.style.transform='translateY(0px)'}); animateSlideEffects(slide)}
+function animateSlideEffects(slide){slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar,i)=>{bar.classList.add('fill-init'); bar.style.width='0%'; bar.style.transition=`width 0.6s ease ${i*.1}s`; bar.offsetHeight; bar.style.width=bar.dataset.width+'%'})}
+document.addEventListener('mousemove',(e)=>{const spotlight=document.querySelector('.mouse-spotlight'); if(spotlight) spotlight.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(249,115,22,0.06), transparent 40%)`})
+;(function(){let mouseX=window.innerWidth/2, mouseY=window.innerHeight/2; const cx=window.innerWidth/2, cy=window.innerHeight/2; document.addEventListener('mousemove',(e)=>{mouseX=e.clientX; mouseY=e.clientY}); (function tick(){const ox=(mouseX-cx)/cx, oy=(mouseY-cy)/cy; document.querySelectorAll('.deco-shape').forEach(shape=>{const speed=parseFloat(shape.dataset.speed)||0.03; shape.style.transform=`translate(${ox*speed*100}px, ${oy*speed*100}px)`}); requestAnimationFrame(tick)})()})();
+window.initParticles=function(canvas, options){if(!canvas) return; const ctx=canvas.getContext('2d'); function resize(){canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight} resize(); window.addEventListener('resize', resize); const interactive=options.interactive!==false; const count=options.count||(interactive?55:18); let mx=-1000,my=-1000; const particles=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*2.5+.8,alpha:Math.random()*.35+.1})); if(interactive){canvas.addEventListener('mousemove',(e)=>{const rect=canvas.getBoundingClientRect(); mx=e.clientX-rect.left; my=e.clientY-rect.top}); canvas.addEventListener('mouseleave',()=>{mx=-1000; my=-1000})} (function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{if(interactive){const dx=p.x-mx, dy=p.y-my, dist=Math.sqrt(dx*dx+dy*dy)||1; if(dist<120){const force=(120-dist)/120*2; p.vx+=(dx/dist)*force*.1; p.vy+=(dy/dist)*force*.1}} p.vx*=.98; p.vy*=.98; p.x+=p.vx; p.y+=p.vy; if(p.x<0) p.x=canvas.width; if(p.x>canvas.width) p.x=0; if(p.y<0) p.y=canvas.height; if(p.y>canvas.height) p.y=0; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle=`rgba(249,115,22,${p.alpha})`; ctx.fill()}); requestAnimationFrame(animate)})()}
+document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:55})); document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:18}));
+try{animateSlide(document.querySelector('.slide.active'))}catch(e){}
+</script>
+</body>
+</html>
